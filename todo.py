@@ -15,7 +15,21 @@ class Zadania(QWidget, Ui_Widget):
         self.logujBtn.clicked.connect(self.loguj)
         self.koniecBtn.clicked.connect(self.koniec)
  
-
+    def loguj(self):
+        login, haslo, ok = LoginDialog.getLoginHaslo(self)
+        if not ok:
+            return
+ 
+        if not login or not haslo:
+            QMessageBox.warning(self, 'Błąd',
+                                'Pusty login lub hasło', QMessageBox.Ok)
+            return
+        
+        QMessageBox.information(self, 'Dane logowania', 'Podano: ' +
+                                login + ' ' + haslo, QMessageBox.Ok)
+                                
+    def koniec(self):
+        self.close()
  
 if __name__ == '__main__':
     import sys
